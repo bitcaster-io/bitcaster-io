@@ -1,0 +1,46 @@
+{% extends "_page.html" %}
+{% block content %}
+    <div class="container">
+    <h1 class="mt-4 mb-3">Plugins
+{#        <small>Subheading</small>#}
+    </h1>
+
+    <div class="row">
+        {% for plugin_row in plugins  | batch(4, '&nbsp;') %}
+            <div class="row">
+                {% for plugin in plugin_row %}
+                    <div class="col-lg-3 col-md-4 col-sm-6 portfolio-item">
+                        <div class="card -100">
+                            <span class="mt-2 text-center">
+                            <img width="50" height="50" src="/static/icons/{{ plugin }}.png" alt="">
+                                </span>
+                            <div class="card-body">
+                                <h4 class="card-title text-center">
+                                    {{ plugins[plugin] }}
+                                </h4>
+                                <p class="card-text">
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    {#                        <div class="col-4">#}
+                    {#                            <div><img width="50" height="50" src="static/icons/{{ plugin }}.png"></div>#}
+                    {#                            <div#}
+                    {#                            {{ plugin }}</div>#}
+                    {#                        </div>#}
+                {% endfor %}
+            </div>
+        {% endfor %}
+    </div>
+    </div>
+{% endblock %}
