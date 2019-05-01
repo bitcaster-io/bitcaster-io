@@ -36,8 +36,8 @@ def home():
     return r
 
 
-@app.route('/plugins/')
-def plugins():
+@app.route('/dispatchers/')
+def dispatchers():
     plugins = {'facebook': 'Facebook',
                'gmail': 'GMail',
                'hangout': 'Hangout',
@@ -52,7 +52,7 @@ def plugins():
                'yammer': 'Yammer',
                'zulip': 'Zulip'
                }
-    r = make_response(render_template('plugins.html', plugins=plugins))
+    r = make_response(render_template('dispatchers.html', plugins=plugins))
     return r
 
 
