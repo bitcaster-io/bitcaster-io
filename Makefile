@@ -29,7 +29,7 @@ build:
 			--build-arg VERSION=${TARGET} \
 			--build-arg BUILD_DATE=${BUILD_DATE} \
 			-t ${DOCKER_IMAGE} \
-			-f docker/${DOCKERFILE} .
+			-f ${DOCKERFILE} .
 	docker images | grep ${DOCKER_IMAGE_NAME}
 
 
