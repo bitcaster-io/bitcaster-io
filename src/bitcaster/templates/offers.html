@@ -15,7 +15,7 @@
         }
     </style>{% endblock %}
 {% block header %}{% endblock %}
-{% block content %}
+{% block page %}
 
     <div class="sticky-footer-wrapper">
 
@@ -65,10 +65,11 @@
                                     Professional
                                 </h3>
                                 <p class="text-center color-purple-medium family-mono small mb-3">
-                                    $5000/year
+                                    ask for quotation
                                 </p>
                                 <p class="mb-3">
-                                    <a href="#" class="btn btn-primary btn-block" role="button">Get started</a>
+                                    <a href="/info/?release=professional" class="btn btn-primary btn-block"
+                                       role="button">Get started</a>
                                 </p>
                                 <div class="pcard-blurb">
                                     <p>
@@ -97,11 +98,12 @@
                                 <h3 class="text-center h4 mb-0">
                                     Business
                                 </h3>
-                                <p class="text-center color-purple-medium family-mono small mb-3">
-                                    $9000/year
+                                <p class="text-center small mb-3">
+                                    ask for quotation
                                 </p>
                                 <p class="mb-3">
-                                    <a href="#" class="btn btn-primary btn-block" role="button">Get started</a>
+                                    <a href="/info/?release=business" class="btn btn-primary btn-block" role="button">Get
+                                        started</a>
                                 </p>
                                 <div class="pcard-blurb">
                                     <p>
@@ -110,13 +112,13 @@
 
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <i class="fas fa-check green mr-2"></i>aaaaa
+                                            <i class="fas fa-check green mr-2"></i>Advanced analytics
                                         </li>
                                         <li>
-                                            <i class="fas fa-check green mr-2"></i>aaaaa
+                                            <i class="fas fa-check green mr-2"></i>LDAP authentication
                                         </li>
                                         <li>
-                                            <i class="fas fa-check green mr-2"></i>aaaaa
+                                            <i class="fas fa-check green mr-2"></i>Rate limits
                                         </li>
                                     </ul>
                                 </div>
@@ -139,20 +141,14 @@
                                 <div class="pcard-blurb">
                                     <ul class="list-unstyled mb-0">
                                         <li>
-                                            <span aria-hidden="true"
-                                                  class="family-no-emoji color-purple-highlight">✔︎</span> High volume
-                                            pricing
+                                            <i class="fas fa-check green mr-2"></i>Architecture guidelines
                                         </li>
                                         <li>
-                                            <span aria-hidden="true"
-                                                  class="family-no-emoji color-purple-highlight">✔︎</span> Priority
-                                            support and SLAs
+                                            <i class="fas fa-check green mr-2"></i>Integration support
                                         </li>
-                                        <li>
-                                            <span aria-hidden="true"
-                                                  class="family-no-emoji color-purple-highlight">✔︎</span> Single tenant
-                                            options
-                                        </li>
+                                        {#                                        <li>#}
+                                        {#                                            <i class="fas fa-check green mr-2"></i>Architecture support#}
+                                        {#                                        </li>#}
                                     </ul>
                                 </div>
                             </div>
@@ -166,7 +162,7 @@
             <div class="container">
                 <header class="text-center mb-3 mb-lg-0">
                     <h2 class="h3">
-                        All plans include Bitcaster’s core message dispatching features
+                        All releases include Bitcaster’s core message dispatching features
                         <div>
                             <small class="mt-1">
                                 Choose the functionality that fits your business
@@ -184,12 +180,26 @@
                             </th>
                             <th scope="pricing" width="" class="pt-2 col text-center bg-white">
                                 Entry Level
+                                <p class="mb-3">
+                                    <a href="/downloads/#free" class="btn btn-primary btn-block" role="button">Get
+                                        started</a>
+                                </p>
+
                             </th>
                             <th scope="pricing" width="" class="pt-2 col text-center bg-white">
                                 Professional
+                                <p class="mb-3">
+                                    <a href="/info/?release=professional" class="btn btn-primary btn-block"
+                                       role="button">Get started</a>
+                                </p>
+
                             </th>
                             <th scope="pricing" width="" class="pt-2 col text-center bg-white">
                                 Business
+                                <p class="mb-3">
+                                    <a href="/info/?release=business" class="btn btn-primary btn-block"
+                                       role="button">Get started</a>
+                                </p>
                             </th>
                         </tr>
                         <tr class="row mx-0">
@@ -219,13 +229,19 @@
                                     <div scope="row"
                                          class="col-4 col-lg-5 col-xl-6 p-2 align-items-center font-weight-normal  border-top-0">
                                         {{ feature.0 }}</div>
-                                    <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                        <span>{{ feature.1|checkmark() }}</span></div>
-                                    <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                        <span>{{ feature.2|checkmark }}</span></div>
-                                    <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                        <span>{{ feature.3|checkmark }}</span>
-                                    </div>
+                                    {% if feature|length == 4 %}
+                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                            <span>{{ feature.1|checkmark() }}</span></div>
+                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                            <span>{{ feature.2|checkmark }}</span></div>
+                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                            <span>{{ feature.3|checkmark }}</span>
+                                        </div>
+                                    {% else %}
+                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                            Contact sales
+                                        </div>
+                                    {% endif %}
                                 </div>
                             {% endfor %}
                         </div>

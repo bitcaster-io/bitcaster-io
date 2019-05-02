@@ -23,7 +23,7 @@ help:
 
 
 build:
-	cd .. && docker build \
+	docker build \
 			${BUILD_OPTIONS} \
 			--build-arg DEVELOP=${DEVELOP} \
 			--build-arg VERSION=${TARGET} \
@@ -34,8 +34,7 @@ build:
 
 
 .run:
-	mkdir -p ../${VOLUME}
-	cd .. && docker run \
+	docker run \
 	 		--rm \
 	 		--name=${CONTAINER_NAME} \
 			-p 5000:5000 \
@@ -57,9 +56,6 @@ release:
 deploy:
 	lazo rancher --insecure upgrade bitcaster:bitcaster-io bitcaster/bitcaster-io:${TARGET}
 #	$(MAKE) bump
-
-bump:
-	cd .. && bumpversion --config-file=.bumpversion.cfg num --commit
 
 run:
 	$(MAKE) .run

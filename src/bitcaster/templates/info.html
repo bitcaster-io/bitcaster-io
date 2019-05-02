@@ -1,0 +1,92 @@
+{% extends "_base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block page %}
+    <section class="hero pb-3 pb-md-5 pt-md-4 bg-black">
+        <div class="container text-center">
+
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1">
+                    <h1 class="h3 h1-md color-white mb-0">Request a Demo</h1>
+
+                    <p class="mt-2 mb-0 color-purple-light family-mono">
+                        Have questions about Bitcaster?
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <main role="main">
+        <section class="pt-3 pt-md-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4 order-md-2 mb-3 mb-md-5">
+                        <div class="border bg-light p-3 p-md-4 rounded">
+                            <h3>Talk to Us</h3>
+                            <ul>
+                                <li>See a Demo</li>
+                                <li>Ask Quotation</li>
+                                <li>Request custom dispatcher</li>
+                                <li>Consultancy on custom integration</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 order-md-1">
+                        {% if ConnectionRefusedError %}
+                                <div class="alert alert-danger" role="alert">
+                                    We're experiencing a problem please try later
+                                </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="col-md-8 order-md-1 mb-3 mb-md-5 border p-3">
+                        {% if email_sent %}
+                                <div class="alert alert-success" role="alert">
+                                    <div>Email sent, you will be contacted soon</div>
+                                </div>
+                        {% else %}
+                            <form class="form form-horizontal" method="POST" action=".">
+                            {{ form.hidden_tag() }}
+                                {{ form.release }}
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.first_name) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.last_name) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.email) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.phone) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.company) }}
+                                </div>
+                                <div class="col-6">
+                                    {{ wtf.form_field(form.company_website) }}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">
+                                    {{ wtf.form_field(form.use_case) }}
+                                </div>
+                            </div>
+                            {{ form.recaptcha }}
+                            <div class="invalid-feedback">
+                                {{ form.errors.get("recaptcha", [""])[0] }}
+                            </div>
+                            <div class="float-right">
+                                <input type="submit" class="btn btn-primary" value="Submit">
+                            </div>
+                    </div>
+                        {% endif %}
+                </div>
+            </div>
+        </section>
+    </main>
+{% endblock %}

@@ -20,3 +20,17 @@ body {
 .portfolio-item {
   margin-bottom: 30px;
 }
+
+.btn-primary {
+    color: black;
+    background-color: #d7d7d7;
+    border-color: black;
+}
+.btn-primary:hover {
+    color: #fff;
+    background-color: #808080;
+    border-color: black;
+}
+.invalid-feedback{
+    display: block;
+}

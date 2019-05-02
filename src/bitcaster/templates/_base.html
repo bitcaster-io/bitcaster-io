@@ -1,34 +1,9 @@
-<!doctype html>
-<html lang="en">
-<head>
-    {% block head %}
-        <!-- Required meta tags -->
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="shortcut icon" type="image/png" href="/static/favicon.ico" %}"/>
+{% extends "bootstrap/base.html" %}
+{% block styles %}
+    {{ super() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/modern-business.css') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='favicon.ico') }}" %}"/>
 
-        {% block styles %}
-            <!-- Bootstrap CSS -->
-            {{ bootstrap.load_css() }}
-            <link rel="stylesheet" href="/static/css/modern-business.css">
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/solid.css"
-                  integrity="sha384-QokYePQSOwpBDuhlHOsX0ymF6R/vLk/UQVz3WHa6wygxI5oGTmDTv8wahFOSspdm"
-                  crossorigin="anonymous">
-            {#<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/regular.css" integrity="sha384-FKw7x8fCxuvzBwOJmhTJJsKzBl8dnN9e2R4+pXRfYoHivikuHkzWyhKWDSMcGNK8" crossorigin="anonymous">#}
-            {#<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/brands.css" integrity="sha384-n9+6/aSqa9lBidZMRCQHTHKJscPq6NW4pCQBiMmHdUCvPN8ZOg2zJJTkC7WIezWv" crossorigin="anonymous">#}
-            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/fontawesome.css"
-                  integrity="sha384-vd1e11sR28tEK9YANUtpIOdjGW14pS87bUBuOIoBILVWLFnS+MCX9T6MMf0VdPGq"
-                  crossorigin="anonymous">
-
-
-
-            {#            <link rel="stylesheet" href="/static/fontawesome-5.8.1.css"#}
-            {#                  integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf"#}
-            {#                  crossorigin="anonymous">#}
-        {% endblock %}
-
-        <title>Bitcaster:{% block title %}{{ title }}{% endblock %}</title>
-    {% endblock %}
     <style>
         .tracking-banner {
             position: fixed;
@@ -46,14 +21,12 @@
             font-size: 0.875rem;
             text-align: center;
             color: black;
-        {#background-color: #6c5fc7;#}{#font-family: "Maison Mono", "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", monospace;#} z-index: 1030;
         }
     </style>
-</head>
-<body>
-<!-- Your page content -->
-{% block body %}
-    <!-- Navigation -->{% block nav %}
+{% endblock %}
+{% block title %}Bitcaster {{ title }}{% endblock %}
+
+{% block navbar %}
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="/">Bitcaster IO</a>
@@ -71,7 +44,7 @@
                         <a class="nav-link" href="http://docs.bitcaster.io/">Documentation</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/pricing">Pricing</a>
+                        <a class="nav-link" href="/offers">Offers</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/contact">Contact</a>
@@ -119,61 +92,56 @@
     </nav>
 {% endblock %}
 
+{% block content %}
     {% block header %}{% endblock %}
-
-    <!-- Page Content -->{% block content %}{% endblock %}
-
-
-    <!-- Footer -->{% block footer %}
-    <footer class="py-5 bg-dark">
+    {% block page %}{% endblock %}
+    {% block footer %}
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-white">Copyright &copy; 2019 OS4D ltd</p>
+            </div>
+            <!-- /.container -->
+        </footer>
+    {% endblock %}
+    {% block privacy %}
+        <span id="privacy" class="banner tracking-banner pt-2 bg-light">
         <div class="container">
-            <p class="m-0 text-center text-white">Copyright &copy; 2019 OS4D ltd</p>
+            <div class="row">
+                <div class="col-md-9 text-left mb-2">
+                This website uses cookies and other technology to customize advertising and provide you a more personalized experience.
+                </div>
+                <div class="col-md-3 mb-2">
+                    <button id="btn-privacy" class="btn btn-sm btn-outline-dark btn-block">Accept</button>
+                </div>
+            </div>
         </div>
-        <!-- /.container -->
-    </footer>{% endblock %}
-    <span id="privacy" class="banner tracking-banner pt-2 bg-light">
-    <div class="container">
-    <div class="row">
-      <div class="col-md-9 text-left mb-2">
-        This website uses cookies and other technology to customize advertising and provide you a more personalized experience.
-      </div>
-      <div class="col-md-3 mb-2">
-        <button id="btn-privacy" class="btn btn-sm btn-outline-dark btn-block">Accept</button>
-      </div>
-    </div>
-  </div>
-</span>
+        </span>
+    {% endblock %}
 {% endblock %}
-
 {% block scripts %}
-    <!-- Optional JavaScript -->
-    {{ bootstrap.load_js() }}
-    {#      <script src="vendor/jquery/jquery.min.js"></script>#}
-    {#  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>#}
+    {{ super() }}
     <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
 
-{% endblock %}
-<script>
-    $('#btn-privacy').on('click', function () {
-        Cookies.set('privacy', 1);
-        $('#privacy').hide();
-    });
-    if ( Cookies.get('privacy') === "1" ){
-        $('#privacy').hide();
-    }
-</script>
-{% if GOOGLE_ANALYTICS_CODE %}
-    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_CODE }}"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
+        $('#btn-privacy').on('click', function () {
+            Cookies.set('privacy', 1);
+            $('#privacy').hide();
+        });
+        if (Cookies.get('privacy') === "1") {
+            $('#privacy').hide();
         }
-
-        gtag('js', new Date());
-        gtag('config', '{{ GOOGLE_ANALYTICS_CODE }}');
     </script>
-{% endif %}
-</body>
-</html>
+    {% if GOOGLE_ANALYTICS_CODE %}
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ config.GOOGLE_ANALYTICS_CODE }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+            gtag('config', '{{ GOOGLE_ANALYTICS_CODE }}');
+        </script>
+    {% endif %}
+{% endblock %}

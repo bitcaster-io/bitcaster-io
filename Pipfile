@@ -5,11 +5,14 @@ verify_ssl = true
 
 [dev-packages]
 bumpversion = "*"
+ipdb = "*"
 
 [packages]
 flask = "*"
-bootstrap-flask = "*"
-
+flask-bootstrap4 = "*"
+flask-caching = "*"
+flask-wtf = "*"
+flask-mail = "*"
 
 [requires]
 python_version = "3.6"
