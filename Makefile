@@ -1,7 +1,7 @@
 DEVELOP?=0
 DOCKER_PASS?=
 DOCKER_USER?=
-TARGET?=0.5.0a0
+TARGET?=0.6.0a0
 BUILD_DATE:="$(shell date +"%Y-%m-%d %H:%M")"
 # below vars are used internally
 BUILD_OPTIONS?=--squash
@@ -38,6 +38,15 @@ build:
 	 		--rm \
 	 		--name=${CONTAINER_NAME} \
 			-p 5000:5000 \
+			-e SECRET_KEY=${SECRET_KEY} \
+			-e RECAPTCHA_PUBLIC_KEY=${RECAPTCHA_PUBLIC_KEY} \
+			-e RECAPTCHA_PRIVATE_KEY=${RECAPTCHA_PRIVATE_KEY} \
+			-e MAIL_SERVER=${MAIL_SERVER} \
+			-e MAIL_PORT=${MAIL_PORT}\
+			-e MAIL_USE_TLS=${MAIL_USE_TLS}\
+			-e MAIL_USERNAME=${MAIL_USERNAME}\
+			-e MAIL_PASSWORD=${MAIL_PASSWORD}\
+			-e MAIL_RECIPIENTS=${MAIL_RECIPIENTS}\
 			${RUN_OPTIONS} \
 			${DOCKER_IMAGE} \
 			${CMD}
@@ -59,3 +68,5 @@ deploy:
 
 run:
 	$(MAKE) .run
+
+
