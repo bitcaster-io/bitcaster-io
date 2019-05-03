@@ -56,10 +56,10 @@ release:
 	pass docker/saxix | docker login -u saxix --password-stdin
 	docker tag ${DOCKER_IMAGE_NAME}:${TARGET} ${DOCKER_IMAGE_NAME}:latest
 	docker push ${DOCKER_IMAGE_NAME}:latest
-	docker push ${DOCKER_IMAGE_NAME}:${TARGET}
+#	docker push ${DOCKER_IMAGE_NAME}:${TARGET}
 
 deploy:
-	lazo rancher --insecure upgrade bitcaster:bitcaster-io bitcaster/bitcaster-io:${TARGET}
+	lazo rancher --insecure upgrade bitcaster:bitcaster-io bitcaster/bitcaster-io:latest
 #	$(MAKE) bump
 
 run:
