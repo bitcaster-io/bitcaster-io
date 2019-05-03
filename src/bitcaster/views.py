@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from flask import make_response, render_template, request
 from flask_mail import Message
 
@@ -63,23 +65,34 @@ Note:{use_case}
 
 @app.route('/offers/')
 def pricing():
-    features = [('View events across all projects in your organization', False, False, True),
-                ('Third-party integrations', False, False, True),
-                ('Configurable notification logging level', False, True, True),
-                ('Custom rate limits on a per-application basis', False, False, True),
-                ('Custom rate limits on a per-events basis', False, False, True),
-                # ('Search, filtering, and grouping by attribute to isolate signal', False, False, True),
-                ('Unlimited users', False, True, True),
-                # ('Support for SAML 2.0-based single-sign-on', False, False, True),
-                ('Single-sign-on via Google Apps and GitHub Organizations', False, True, True),
-                ('Two-factor authentication via U2F device, TOTP app, or SMS', False, True, True),
-                ('Community forum access', True, True, True),
+    features = OrderedDict()
+    features['General features'] = [
+        ('Unlimited users', False, True, True),
+        ('View events across all applications in your organization', False, False, True),
+        ('Third-party integrations', False, False, True)]
 
-                ('Priority support and custom support agreement', '-'),
-                ('Private onboarding and training sessions', '-'),
-                ]
+    features['Monitoring & Management'] = [
+        ('Configurable notification logging level', False, True, True),
+        ('Extended time series data', False, True, True),
+        ('Custom rate limits on a per-application basis', False, False, True),
+        ('Custom rate limits on a per-events basis', False, False, True)]
+
+    features['Security & Administration'] = [
+        ('Single-sign-on via Google Apps and GitHub Organizations', False, True, True),
+        ('Single-sign-on via Microsoft Azure ', False, False, True),
+        ('LDAP Authentication', False, False, True),
+        ('Two-factor authentication via U2F device, TOTP app, or SMS', False, True, True)]
+
+    features['Support and Services'] = [
+        ('Community forum access', True, True, True),
+        ('Multiple language messages', False, True, True),
+
+        ('Priority support and custom support agreement', '-'),
+        ('Private onboarding and training sessions', '-')]
+
     r = make_response(render_template('offers.html', features=features))
     return r
+
 
 @app.route('/<page>/')
 def page(page):

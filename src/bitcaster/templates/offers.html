@@ -220,32 +220,34 @@
                         </tr>
                         </tbody>
                     </table>
+                    {% for section, features in features.items() %}
 
-                    {#                    <h3 class="h4">Monitoring &amp; Management</h3>#}
-                    <div class="border rounded mb-4">
-                        <div class="border-bottom ">
-                            {% for feature in features %}
-                                <div class="row align-items-stretch mx-0 {{ loop.cycle('bg-light', '') }}">
-                                    <div scope="row"
-                                         class="col-4 col-lg-5 col-xl-6 p-2 align-items-center font-weight-normal  border-top-0">
-                                        {{ feature.0 }}</div>
-                                    {% if feature|length == 4 %}
-                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                            <span>{{ feature.1|checkmark() }}</span></div>
-                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                            <span>{{ feature.2|checkmark }}</span></div>
-                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                            <span>{{ feature.3|checkmark }}</span>
-                                        </div>
-                                    {% else %}
-                                        <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
-                                            Contact sales
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            {% endfor %}
+                        <h3 class="h4">{{ section }}</h3>
+                        <div class="border rounded mb-4">
+                            <div class="border-bottom ">
+                                {% for feature in features %}
+                                    <div class="row align-items-stretch mx-0 {{ loop.cycle('bg-light', '') }}">
+                                        <div scope="row"
+                                             class="col-4 col-lg-5 col-xl-6 p-2 align-items-center font-weight-normal  border-top-0">
+                                            {{ feature.0 }}</div>
+                                        {% if feature|length == 4 %}
+                                            <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                                <span>{{ feature.1|checkmark() }}</span></div>
+                                            <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                                <span>{{ feature.2|checkmark }}</span></div>
+                                            <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                                <span>{{ feature.3|checkmark }}</span>
+                                            </div>
+                                        {% else %}
+                                            <div class="col p-2 d-flex align-items-center justify-content-center text-center family-no-emoji color-purple-highlight border-left border-top-0">
+                                                Contact sales
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endfor %}
+                            </div>
                         </div>
-                    </div>
+                    {% endfor %}
                 </div>
 
             </div>
