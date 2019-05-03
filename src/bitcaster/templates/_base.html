@@ -1,4 +1,16 @@
 {% extends "bootstrap/base.html" %}
+{% block metas %}
+{{ super() }}
+<meta name="description" content="" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Bitcaster | Broadcast your bits" />
+    <meta property="og:description" content=""/>
+    <meta property="og:url" content="https://bitcaster.io" />
+
+{% endblock metas %}
+{% block title %}Bitcaster {{ title }}{% endblock %}
+
 {% block styles %}
     {{ super() }}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/modern-business.css') }}">
@@ -24,7 +36,6 @@
         }
     </style>
 {% endblock %}
-{% block title %}Bitcaster {{ title }}{% endblock %}
 
 {% block navbar %}
     <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
